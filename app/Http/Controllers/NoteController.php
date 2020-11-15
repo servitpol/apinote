@@ -13,7 +13,7 @@ use Illuminate\Support\Str;
 
 class NoteController extends Controller
 {
-    // All notes
+    // All notes ..
     public function notes()
     {
         $notes = Note::getAllNotes();
