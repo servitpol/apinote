@@ -18,7 +18,7 @@ class NoteController extends Controller
     {
         $notes = Note::getAllNotes();
 
-        if (!$notes->isNotEmpty()) {
+        if ($notes->isEmpty()) {
             return response()->json(['error' => true, 'message' => 'Notes not found'], 404);
         }
 
@@ -30,7 +30,7 @@ class NoteController extends Controller
     {
         $note = Note::getNoteById($note_id);
 
-        if (!$note->isNotEmpty()) {
+        if ($note->isEmpty()) {
             return response()->json(['error' => true, 'message' => 'Note not found'], 404);
         }
 
@@ -74,7 +74,7 @@ class NoteController extends Controller
     {
         $user_note = Note::getNoteById($note->id);
 
-        if (!$user_note->isNotEmpty()) {
+        if ($user_note->isEmpty()) {
             return response()->json(['error' => true, 'message' => 'Note not found'], 404);
         }
 
@@ -119,7 +119,7 @@ class NoteController extends Controller
     {
         $user_note = Note::getNoteById($note->id);
 
-        if (!$user_note->isNotEmpty()) {
+        if ($user_note->isEmpty()) {
             return response()->json(['error' => true, 'message' => 'Note not found'], 404);
         }
 
