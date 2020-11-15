@@ -12,9 +12,13 @@
 The project was executed according to the test task https://drive.google.com/file/d/1OgA7GCiXLkQl-6j9IcI818bPcGVPCm3y/view?usp=sharing
 
 Libraries used:
-[JSON Web Token Authentication for Laravel & Lumen](https://github.com/tymondesigns/jwt-auth) 
+
+[JSON Web Token Authentication for Laravel & Lumen](https://github.com/tymondesigns/jwt-auth)
+
 [Intervention Image](https://github.com/Intervention/image) - for working with images 
+
 [Scribe](https://github.com/knuckleswtf/scribe) - to describe how the api works 
+
 
 
 The working version of the application is deployed here https://apinotes.wp-cpm.site/
@@ -51,5 +55,7 @@ php artisan db:seed
 Use the application according to the api work description which can be found https://apinotes.wp-cpm.site/public/docs
 
 Fake (test) user:
+
 email: admin@admin.com
+
 pass: admin
