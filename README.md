@@ -9,19 +9,21 @@
 
 # API for notes app.
 
-The project was executed according to the test task https://drive.google.com/file/d/1OgA7GCiXLkQl-6j9IcI818bPcGVPCm3y/view?usp=sharing
 
-Libraries used:
+The project was executed according to the test task https://clck.ru/RwFwT
+The working version of the application is deployed here https://apinotes.wp-cpm.site/ 
+***
 
-[JSON Web Token Authentication for Laravel & Lumen](https://github.com/tymondesigns/jwt-auth)
+**Libraries used:**  
 
-[Intervention Image](https://github.com/Intervention/image) - for working with images 
+[JSON Web Token Authentication for Laravel & Lumen](https://github.com/tymondesigns/jwt-auth)  
 
-[Scribe](https://github.com/knuckleswtf/scribe) - to describe how the api works 
+[Intervention Image](https://github.com/Intervention/image) - for working with images  
+
+[Scribe](https://github.com/knuckleswtf/scribe) - to describe how the api works  
 
 
-
-The working version of the application is deployed here https://apinotes.wp-cpm.site/
+***
 
 To deploy the application to your local computer - use the following console commands in your LAMP / WAMP environment:
 ```sh
