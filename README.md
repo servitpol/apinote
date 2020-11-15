@@ -12,7 +12,8 @@
 
 The project was executed according to the test task https://clck.ru/RwFwT  
 
-The working version of the application is deployed here https://apinotes.wp-cpm.site/ 
+
+Use the application according to the api work description which can be found https://apinotes.wp-cpm.site/public/docs
 ***
 
 **Libraries used:**  
@@ -55,7 +56,8 @@ Fill the database with fake values using the command:
 ```sh
 php artisan db:seed
 ```
-Use the application according to the api work description which can be found https://apinotes.wp-cpm.site/public/docs
+
+The working version of the application is deployed here https://apinotes.wp-cpm.site/
 
 Fake (test) user:
 
