@@ -10,7 +10,8 @@
 # API for notes app.
 
 
-The project was executed according to the test task https://clck.ru/RwFwT
+The project was executed according to the test task https://clck.ru/RwFwT  
+
 The working version of the application is deployed here https://apinotes.wp-cpm.site/ 
 ***
 
