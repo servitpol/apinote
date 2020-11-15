@@ -1,0 +1,10 @@
+<IfModule mod_rewrite.c>
+	Options +FollowSymlinks
+	#RewriteEngine on
+	#RewriteCond %{REQUEST_URI} !/maintenance
+	#RewriteCond %{REMOTE_ADDR} !^46\.175\.254\.96
+	#RewriteRule .? /maintenance [R=302,L]
+	
+	RewriteEngine On
+	RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>

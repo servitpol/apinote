@@ -1,0 +1,869 @@
+openapi: 3.0.3
+info:
+    title: Laravel
+    description: ''
+    version: 1.0.0
+servers:
+    -
+        url: 'https://apinotes.wp-cpm.site'
+paths:
+    /api/login:
+        post:
+            summary: Authentication
+            description: ''
+            parameters:
+                -
+                    in: query
+                    name: email
+                    description: 'Enter the email you provided during registration.'
+                    example: autem
+                    required: true
+                    schema:
+                        type: string
+                        description: 'Enter the email you provided during registration.'
+                        example: autem
+                -
+                    in: query
+                    name: password
+                    description: 'Enter the email you provided during registration.'
+                    example: voluptate
+                    required: true
+                    schema:
+                        type: string
+                        description: 'Enter the email you provided during registration.'
+                        example: voluptate
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses:
+                200:
+                    description: '200, Incorrect Login/Password'
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    error: true
+                                    message: 'Incorrect Login/Password'
+                                properties:
+                                    error: { type: boolean, example: true }
+                                    message: { type: string, example: 'Incorrect Login/Password' }
+            tags:
+                - Endpoints
+            security: []
+    /api/register:
+        post:
+            summary: Registration
+            description: ''
+            parameters:
+                -
+                    in: query
+                    name: name
+                    description: 'Enter your name.'
+                    example: ut
+                    required: true
+                    schema:
+                        type: string
+                        description: 'Enter your name.'
+                        example: ut
+                -
+                    in: query
+                    name: email
+                    description: 'Enter your email.'
+                    example: eum
+                    required: true
+                    schema:
+                        type: string
+                        description: 'Enter your email.'
+                        example: eum
+                -
+                    in: query
+                    name: password
+                    description: 'Enter your password.'
+                    example: quam
+                    required: true
+                    schema:
+                        type: string
+                        description: 'Enter your password.'
+                        example: quam
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses:
+                200:
+                    description: '200, success'
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHR...
+                                properties:
+                                    token: { type: string, example: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHR... }
+                401:
+                    description: '401, Missing password'
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    error: true
+                                    message: { password: ['The password field is required.'] }
+                                properties:
+                                    error: { type: boolean, example: true }
+                                    message: { type: object, example: { password: ['The password field is required.'] } }
+            tags:
+                - Endpoints
+            security: []
+    /api/note:
+        get:
+            summary: 'All notes'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Authorization
+                    description: ''
+                    example: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHR...'
+                    schema:
+                        type: string
+            responses:
+                200:
+                    description: '200, success'
+                    content:
+                        text/plain:
+                            schema:
+                                type: string
+                                example: "{\n\"id\": 44,\n\"user_id\": 1,\n\"short_note\": \"Hatter, 'you wouldn't talk about trouble!' said the Hatter. 'You...\",\n\"created_at\": \"2020-10-22 07:13:30\",\n\"updated_at\": \"2020-10-22 07:13:30\",\n\"full_img_path\": \"https://apinotes.wp-cpm.site/public/images/fake/m7z1d2Ljab.jpg\",\n\"thumb_img_path\": \"https://apinotes.wp-cpm.site/public/images/fake/thumb_m7z1d2Ljab.jpg\"\n},\n{\n\"id\": 49,\n\"user_id\": 1,\n\"short_note\": \"MORE than nothing.' 'Nobody asked YOUR opinion,' said Alice. 'Come...\",\n\"created_at\": \"2020-11-05 19:21:45\",\n\"updated_at\": \"2020-11-05 19:21:45\",\n\"full_img_path\": null,\n\"thumb_img_path\": null\n},\n{\n\"id\": 9,\n\"user_id\": 1,\n\"short_note\": \"EVER happen in a natural way again. 'I wonder how...\",\n\"created_at\": \"2020-11-13 05:45:44\",\n\"updated_at\": \"2020-11-13 05:45:44\",\n\"full_img_path\": \"https://apinotes.wp-cpm.site/public/images/fake/whieNCXq7s.jpg\",\n\"thumb_img_path\": \"https://apinotes.wp-cpm.site/public/images/fake/thumb_whieNCXq7s.jpg\"\n},\n{\n\"id\": 23,\n\"user_id\": 1,\n\"short_note\": \"M--' 'Why with an important air, 'are you all ready?...\",\n\"created_at\": \"2020-10-31 03:53:22\",\n\"updated_at\": \"2020-10-31 03:53:22\",\n\"full_img_path\": \"https://apinotes.wp-cpm.site/public/images/fake/AJ4eDYHCJU.jpg\",\n\"thumb_img_path\": \"https://apinotes.wp-cpm.site/public/images/fake/thumb_AJ4eDYHCJU.jpg\"\n}"
+                401:
+                    description: '401, Token is Invalid'
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    error: true
+                                    message: 'Token is Invalid'
+                                properties:
+                                    error: { type: boolean, example: true }
+                                    message: { type: string, example: 'Token is Invalid' }
+            tags:
+                - Endpoints
+            security: []
+        post:
+            summary: 'Create a note'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Authorization
+                    description: ''
+                    example: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHR...'
+                    schema:
+                        type: string
+            responses:
+                200:
+                    description: '200, success'
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    note: 'March Hare took the hookah out of sight, they were mine before. ...(full note)'
+                                    short_note: 'March Hare took the hookah out of sight, they were...'
+                                    updated_at: '2020-11-15T14:15:41.000000Z'
+                                    created_at: '2020-11-15T14:15:41.000000Z'
+                                    id: 56
+                                properties:
+                                    note: { type: string, example: 'March Hare took the hookah out of sight, they were mine before. ...(full note)' }
+                                    short_note: { type: string, example: 'March Hare took the hookah out of sight, they were...' }
+                                    updated_at: { type: string, example: '2020-11-15T14:15:41.000000Z' }
+                                    created_at: { type: string, example: '2020-11-15T14:15:41.000000Z' }
+                                    id: { type: integer, example: 56 }
+                401:
+                    description: '401, The image field errors'
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    error: true
+                                    message: { image: ['The image must be a file of type: jpeg, jpg, png, gif.', 'The image may not be greater than 10000 kilobytes.'] }
+                                properties:
+                                    error: { type: boolean, example: true }
+                                    message: { type: object, example: { image: ['The image must be a file of type: jpeg, jpg, png, gif.', 'The image may not be greater than 10000 kilobytes.'] } }
+            tags:
+                - Endpoints
+            security: []
+    '/api/note/{note_id}':
+        get:
+            summary: 'One note'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Authorization
+                    description: ''
+                    example: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHR...'
+                    schema:
+                        type: string
+            responses:
+                200:
+                    description: '200, success'
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    id: 53
+                                    user_id: 7
+                                    note: 'March Hare took the hookah out of sight, they were mine before. If I or ..(full note)'
+                                    created_at: '2020-11-15 01:33:38'
+                                    updated_at: '2020-11-15 01:33:38'
+                                    full_img_path: 'https://apinotes.wp-cpm.site/public/images/7/53/1605404018.jpg'
+                                    thumb_img_path: 'https://apinotes.wp-cpm.site/public/images/7/53/thumb_1605404018.jpg'
+                                properties:
+                                    id: { type: integer, example: 53 }
+                                    user_id: { type: integer, example: 7 }
+                                    note: { type: string, example: 'March Hare took the hookah out of sight, they were mine before. If I or ..(full note)' }
+                                    created_at: { type: string, example: '2020-11-15 01:33:38' }
+                                    updated_at: { type: string, example: '2020-11-15 01:33:38' }
+                                    full_img_path: { type: string, example: 'https://apinotes.wp-cpm.site/public/images/7/53/1605404018.jpg' }
+                                    thumb_img_path: { type: string, example: 'https://apinotes.wp-cpm.site/public/images/7/53/thumb_1605404018.jpg' }
+                401:
+                    description: '401, Token is Invalid'
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    error: true
+                                    message: 'Token is Invalid'
+                                properties:
+                                    error: { type: boolean, example: true }
+                                    message: { type: string, example: 'Token is Invalid' }
+                404:
+                    description: '404, Note not found'
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    error: true
+                                    message: 'Note not found'
+                                properties:
+                                    error: { type: boolean, example: true }
+                                    message: { type: string, example: 'Note not found' }
+            tags:
+                - Endpoints
+            security: []
+        parameters:
+            -
+                in: path
+                name: note_id
+                description: ''
+                example: accusamus
+                required: true
+                schema:
+                    type: string
+    '/api/note/{note}':
+        put:
+            summary: 'Editing a note'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Authorization
+                    description: ''
+                    example: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHR...'
+                    schema:
+                        type: string
+            responses:
+                200:
+                    description: '200, success'
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    note: 'March Hare took the hookah out of sight, they were mine before. ...(full note)'
+                                    short_note: 'March Hare took the hookah out of sight, they were...'
+                                    updated_at: '2020-11-15T14:15:41.000000Z'
+                                    created_at: '2020-11-15T14:35:47.000000Z'
+                                    id: 56
+                                properties:
+                                    note: { type: string, example: 'March Hare took the hookah out of sight, they were mine before. ...(full note)' }
+                                    short_note: { type: string, example: 'March Hare took the hookah out of sight, they were...' }
+                                    updated_at: { type: string, example: '2020-11-15T14:15:41.000000Z' }
+                                    created_at: { type: string, example: '2020-11-15T14:35:47.000000Z' }
+                                    id: { type: integer, example: 56 }
+                401:
+                    description: '401, The image field errors'
+                    content:
+                        text/plain:
+                            schema:
+                                type: string
+                                example: "{\n\"error\": true,\n\"message\": {\n\"image\": [\n\"The image must be a file of type: jpeg, jpg, png, gif.\",\n\"The image may not be greater than 10000 kilobytes.\"\n]\n}"
+                404:
+                    description: '404, Note not found'
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    error: true
+                                    message: 'Note not found'
+                                properties:
+                                    error: { type: boolean, example: true }
+                                    message: { type: string, example: 'Note not found' }
+            tags:
+                - Endpoints
+            security: []
+        delete:
+            summary: 'Deleting a note'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Authorization
+                    description: ''
+                    example: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHR...'
+                    schema:
+                        type: string
+            responses:
+                404:
+                    description: '404, Note not found'
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    error: true
+                                    message: 'Note not found'
+                                properties:
+                                    error: { type: boolean, example: true }
+                                    message: { type: string, example: 'Note not found' }
+            tags:
+                - Endpoints
+            security: []
+        parameters:
+            -
+                in: path
+                name: note
+                description: ''
+                example: consequuntur
+                required: true
+                schema:
+                    type: string
+    /api/refresh:
+        get:
+            summary: 'Token refresh'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Authorization
+                    description: ''
+                    example: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHR...'
+                    schema:
+                        type: string
+            responses:
+                200:
+                    description: '200, success'
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHR...
+                                properties:
+                                    token: { type: string, example: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHR... }
+                401:
+                    description: '401, Token is Invalid'
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    error: true
+                                    message: 'Token is Invalid'
+                                properties:
+                                    error: { type: boolean, example: true }
+                                    message: { type: string, example: 'Token is Invalid' }
+            tags:
+                - Endpoints
+            security: []
+    /:
+        get:
+            summary: ''
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses:
+                200:
+                    description: ''
+                    content:
+                        text/plain:
+                            schema:
+                                type: string
+                                example: "<!DOCTYPE html>\n<html lang=\"en\">\n    <head>\n        <meta charset=\"utf-8\">\n        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n\n        <title>Laravel</title>\n\n        <!-- Fonts -->\n        <link href=\"https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap\" rel=\"stylesheet\">\n\n        <!-- Styles -->\n        <style>\n            html, body {\n                background-color: #fff;\n                color: #636b6f;\n                font-family: 'Nunito', sans-serif;\n                font-weight: 200;\n                height: 100vh;\n                margin: 0;\n            }\n\n            .full-height {\n                height: 100vh;\n            }\n\n            .flex-center {\n                align-items: center;\n                display: flex;\n                justify-content: center;\n            }\n\n            .position-ref {\n                position: relative;\n            }\n\n            .top-right {\n                position: absolute;\n                right: 10px;\n                top: 18px;\n            }\n\n            .content {\n                text-align: center;\n            }\n\n            .title {\n                font-size: 84px;\n            }\n\n            .links > a {\n                color: #636b6f;\n                padding: 0 25px;\n                font-size: 13px;\n                font-weight: 600;\n                letter-spacing: .1rem;\n                text-decoration: none;\n                text-transform: uppercase;\n            }\n\n            .m-b-md {\n                margin-bottom: 30px;\n            }\n        </style>\n    </head>\n    <body>\n        <div class=\"flex-center position-ref full-height\">\n                            <div class=\"top-right links\">\n                                            <a href=\"http://apinotes.wp-cpm.site/login\">Login</a>\n\n                                                    <a href=\"http://apinotes.wp-cpm.site/register\">Register</a>\n                                                            </div>\n            \n            <div class=\"content\">\n                <div class=\"title m-b-md\">\n                    Laravel\n                </div>\n\n                <div class=\"links\">\n                    <a href=\"https://laravel.com/docs\">Docs</a>\n                    <a href=\"https://laracasts.com\">Laracasts</a>\n                    <a href=\"https://laravel-news.com\">News</a>\n                    <a href=\"https://blog.laravel.com\">Blog</a>\n                    <a href=\"https://nova.laravel.com\">Nova</a>\n                    <a href=\"https://forge.laravel.com\">Forge</a>\n                    <a href=\"https://vapor.laravel.com\">Vapor</a>\n                    <a href=\"https://github.com/laravel/laravel\">GitHub</a>\n                </div>\n            </div>\n        </div>\n    </body>\n</html>\n"
+            tags:
+                - Endpoints
+            security: []
+    /login:
+        get:
+            summary: 'Show the application''s login form.'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses:
+                200:
+                    description: ''
+                    content:
+                        text/plain:
+                            schema:
+                                type: string
+                                example: "<!doctype html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n\n    <!-- CSRF Token -->\n    <meta name=\"csrf-token\" content=\"ic1IcU6OHplmaCAKZa8TvMeXEgBtQMSMwhT11yRy\">\n\n    <title>Laravel</title>\n\n    <!-- Scripts -->\n    <script src=\"http://apinotes.wp-cpm.site/js/app.js\" defer></script>\n\n    <!-- Fonts -->\n    <link rel=\"dns-prefetch\" href=\"//fonts.gstatic.com\">\n    <link href=\"https://fonts.googleapis.com/css?family=Nunito\" rel=\"stylesheet\">\n\n    <!-- Styles -->\n    <link href=\"http://apinotes.wp-cpm.site/css/app.css\" rel=\"stylesheet\">\n</head>\n<body>\n    <div id=\"app\">\n        <nav class=\"navbar navbar-expand-md navbar-light bg-white shadow-sm\">\n            <div class=\"container\">\n                <a class=\"navbar-brand\" href=\"http://apinotes.wp-cpm.site\">\n                    Laravel\n                </a>\n                <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n                    <span class=\"navbar-toggler-icon\"></span>\n                </button>\n\n                <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n                    <!-- Left Side Of Navbar -->\n                    <ul class=\"navbar-nav mr-auto\">\n\n                    </ul>\n\n                    <!-- Right Side Of Navbar -->\n                    <ul class=\"navbar-nav ml-auto\">\n                        <!-- Authentication Links -->\n                                                    <li class=\"nav-item\">\n                                <a class=\"nav-link\" href=\"http://apinotes.wp-cpm.site/login\">Login</a>\n                            </li>\n                                                            <li class=\"nav-item\">\n                                    <a class=\"nav-link\" href=\"http://apinotes.wp-cpm.site/register\">Register</a>\n                                </li>\n                                                                        </ul>\n                </div>\n            </div>\n        </nav>\n\n        <main class=\"py-4\">\n            <div class=\"container\">\n    <div class=\"row justify-content-center\">\n        <div class=\"col-md-8\">\n            <div class=\"card\">\n                <div class=\"card-header\">Login</div>\n\n                <div class=\"card-body\">\n                    <form method=\"POST\" action=\"http://apinotes.wp-cpm.site/login\">\n                        <input type=\"hidden\" name=\"_token\" value=\"ic1IcU6OHplmaCAKZa8TvMeXEgBtQMSMwhT11yRy\">\n                        <div class=\"form-group row\">\n                            <label for=\"email\" class=\"col-md-4 col-form-label text-md-right\">E-Mail Address</label>\n\n                            <div class=\"col-md-6\">\n                                <input id=\"email\" type=\"email\" class=\"form-control \" name=\"email\" value=\"\" required autocomplete=\"email\" autofocus>\n\n                                                            </div>\n                        </div>\n\n                        <div class=\"form-group row\">\n                            <label for=\"password\" class=\"col-md-4 col-form-label text-md-right\">Password</label>\n\n                            <div class=\"col-md-6\">\n                                <input id=\"password\" type=\"password\" class=\"form-control \" name=\"password\" required autocomplete=\"current-password\">\n\n                                                            </div>\n                        </div>\n\n                        <div class=\"form-group row\">\n                            <div class=\"col-md-6 offset-md-4\">\n                                <div class=\"form-check\">\n                                    <input class=\"form-check-input\" type=\"checkbox\" name=\"remember\" id=\"remember\" >\n\n                                    <label class=\"form-check-label\" for=\"remember\">\n                                        Remember Me\n                                    </label>\n                                </div>\n                            </div>\n                        </div>\n\n                        <div class=\"form-group row mb-0\">\n                            <div class=\"col-md-8 offset-md-4\">\n                                <button type=\"submit\" class=\"btn btn-primary\">\n                                    Login\n                                </button>\n\n                                                                    <a class=\"btn btn-link\" href=\"http://apinotes.wp-cpm.site/password/reset\">\n                                        Forgot Your Password?\n                                    </a>\n                                                            </div>\n                        </div>\n                    </form>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n        </main>\n    </div>\n</body>\n</html>\n"
+            tags:
+                - Endpoints
+            security: []
+        post:
+            summary: 'Handle a login request to the application.'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses: {  }
+            tags:
+                - Endpoints
+            security: []
+    /logout:
+        post:
+            summary: 'Log the user out of the application.'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses: {  }
+            tags:
+                - Endpoints
+            security: []
+    /register:
+        get:
+            summary: 'Show the application registration form.'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses:
+                200:
+                    description: ''
+                    content:
+                        text/plain:
+                            schema:
+                                type: string
+                                example: "<!doctype html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n\n    <!-- CSRF Token -->\n    <meta name=\"csrf-token\" content=\"ic1IcU6OHplmaCAKZa8TvMeXEgBtQMSMwhT11yRy\">\n\n    <title>Laravel</title>\n\n    <!-- Scripts -->\n    <script src=\"http://apinotes.wp-cpm.site/js/app.js\" defer></script>\n\n    <!-- Fonts -->\n    <link rel=\"dns-prefetch\" href=\"//fonts.gstatic.com\">\n    <link href=\"https://fonts.googleapis.com/css?family=Nunito\" rel=\"stylesheet\">\n\n    <!-- Styles -->\n    <link href=\"http://apinotes.wp-cpm.site/css/app.css\" rel=\"stylesheet\">\n</head>\n<body>\n    <div id=\"app\">\n        <nav class=\"navbar navbar-expand-md navbar-light bg-white shadow-sm\">\n            <div class=\"container\">\n                <a class=\"navbar-brand\" href=\"http://apinotes.wp-cpm.site\">\n                    Laravel\n                </a>\n                <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n                    <span class=\"navbar-toggler-icon\"></span>\n                </button>\n\n                <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n                    <!-- Left Side Of Navbar -->\n                    <ul class=\"navbar-nav mr-auto\">\n\n                    </ul>\n\n                    <!-- Right Side Of Navbar -->\n                    <ul class=\"navbar-nav ml-auto\">\n                        <!-- Authentication Links -->\n                                                    <li class=\"nav-item\">\n                                <a class=\"nav-link\" href=\"http://apinotes.wp-cpm.site/login\">Login</a>\n                            </li>\n                                                            <li class=\"nav-item\">\n                                    <a class=\"nav-link\" href=\"http://apinotes.wp-cpm.site/register\">Register</a>\n                                </li>\n                                                                        </ul>\n                </div>\n            </div>\n        </nav>\n\n        <main class=\"py-4\">\n            <div class=\"container\">\n    <div class=\"row justify-content-center\">\n        <div class=\"col-md-8\">\n            <div class=\"card\">\n                <div class=\"card-header\">Register</div>\n\n                <div class=\"card-body\">\n                    <form method=\"POST\" action=\"http://apinotes.wp-cpm.site/register\">\n                        <input type=\"hidden\" name=\"_token\" value=\"ic1IcU6OHplmaCAKZa8TvMeXEgBtQMSMwhT11yRy\">\n                        <div class=\"form-group row\">\n                            <label for=\"name\" class=\"col-md-4 col-form-label text-md-right\">Name</label>\n\n                            <div class=\"col-md-6\">\n                                <input id=\"name\" type=\"text\" class=\"form-control \" name=\"name\" value=\"\" required autocomplete=\"name\" autofocus>\n\n                                                            </div>\n                        </div>\n\n                        <div class=\"form-group row\">\n                            <label for=\"email\" class=\"col-md-4 col-form-label text-md-right\">E-Mail Address</label>\n\n                            <div class=\"col-md-6\">\n                                <input id=\"email\" type=\"email\" class=\"form-control \" name=\"email\" value=\"\" required autocomplete=\"email\">\n\n                                                            </div>\n                        </div>\n\n                        <div class=\"form-group row\">\n                            <label for=\"password\" class=\"col-md-4 col-form-label text-md-right\">Password</label>\n\n                            <div class=\"col-md-6\">\n                                <input id=\"password\" type=\"password\" class=\"form-control \" name=\"password\" required autocomplete=\"new-password\">\n\n                                                            </div>\n                        </div>\n\n                        <div class=\"form-group row\">\n                            <label for=\"password-confirm\" class=\"col-md-4 col-form-label text-md-right\">Confirm Password</label>\n\n                            <div class=\"col-md-6\">\n                                <input id=\"password-confirm\" type=\"password\" class=\"form-control\" name=\"password_confirmation\" required autocomplete=\"new-password\">\n                            </div>\n                        </div>\n\n                        <div class=\"form-group row mb-0\">\n                            <div class=\"col-md-6 offset-md-4\">\n                                <button type=\"submit\" class=\"btn btn-primary\">\n                                    Register\n                                </button>\n                            </div>\n                        </div>\n                    </form>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n        </main>\n    </div>\n</body>\n</html>\n"
+            tags:
+                - Endpoints
+            security: []
+        post:
+            summary: 'Handle a registration request for the application.'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses: {  }
+            tags:
+                - Endpoints
+            security: []
+    /password/reset:
+        get:
+            summary: 'Display the form to request a password reset link.'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses:
+                200:
+                    description: ''
+                    content:
+                        text/plain:
+                            schema:
+                                type: string
+                                example: "<!doctype html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n\n    <!-- CSRF Token -->\n    <meta name=\"csrf-token\" content=\"ic1IcU6OHplmaCAKZa8TvMeXEgBtQMSMwhT11yRy\">\n\n    <title>Laravel</title>\n\n    <!-- Scripts -->\n    <script src=\"http://apinotes.wp-cpm.site/js/app.js\" defer></script>\n\n    <!-- Fonts -->\n    <link rel=\"dns-prefetch\" href=\"//fonts.gstatic.com\">\n    <link href=\"https://fonts.googleapis.com/css?family=Nunito\" rel=\"stylesheet\">\n\n    <!-- Styles -->\n    <link href=\"http://apinotes.wp-cpm.site/css/app.css\" rel=\"stylesheet\">\n</head>\n<body>\n    <div id=\"app\">\n        <nav class=\"navbar navbar-expand-md navbar-light bg-white shadow-sm\">\n            <div class=\"container\">\n                <a class=\"navbar-brand\" href=\"http://apinotes.wp-cpm.site\">\n                    Laravel\n                </a>\n                <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n                    <span class=\"navbar-toggler-icon\"></span>\n                </button>\n\n                <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n                    <!-- Left Side Of Navbar -->\n                    <ul class=\"navbar-nav mr-auto\">\n\n                    </ul>\n\n                    <!-- Right Side Of Navbar -->\n                    <ul class=\"navbar-nav ml-auto\">\n                        <!-- Authentication Links -->\n                                                    <li class=\"nav-item\">\n                                <a class=\"nav-link\" href=\"http://apinotes.wp-cpm.site/login\">Login</a>\n                            </li>\n                                                            <li class=\"nav-item\">\n                                    <a class=\"nav-link\" href=\"http://apinotes.wp-cpm.site/register\">Register</a>\n                                </li>\n                                                                        </ul>\n                </div>\n            </div>\n        </nav>\n\n        <main class=\"py-4\">\n            <div class=\"container\">\n    <div class=\"row justify-content-center\">\n        <div class=\"col-md-8\">\n            <div class=\"card\">\n                <div class=\"card-header\">Reset Password</div>\n\n                <div class=\"card-body\">\n                    \n                    <form method=\"POST\" action=\"http://apinotes.wp-cpm.site/password/email\">\n                        <input type=\"hidden\" name=\"_token\" value=\"ic1IcU6OHplmaCAKZa8TvMeXEgBtQMSMwhT11yRy\">\n                        <div class=\"form-group row\">\n                            <label for=\"email\" class=\"col-md-4 col-form-label text-md-right\">E-Mail Address</label>\n\n                            <div class=\"col-md-6\">\n                                <input id=\"email\" type=\"email\" class=\"form-control \" name=\"email\" value=\"\" required autocomplete=\"email\" autofocus>\n\n                                                            </div>\n                        </div>\n\n                        <div class=\"form-group row mb-0\">\n                            <div class=\"col-md-6 offset-md-4\">\n                                <button type=\"submit\" class=\"btn btn-primary\">\n                                    Send Password Reset Link\n                                </button>\n                            </div>\n                        </div>\n                    </form>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n        </main>\n    </div>\n</body>\n</html>\n"
+            tags:
+                - Endpoints
+            security: []
+        post:
+            summary: 'Reset the given user''s password.'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses: {  }
+            tags:
+                - Endpoints
+            security: []
+    /password/email:
+        post:
+            summary: 'Send a reset link to the given user.'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses: {  }
+            tags:
+                - Endpoints
+            security: []
+    '/password/reset/{token}':
+        get:
+            summary: 'Display the password reset view for the given token.'
+            description: 'If no token is present, display the link request form.'
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses:
+                200:
+                    description: ''
+                    content:
+                        text/plain:
+                            schema:
+                                type: string
+                                example: "<!doctype html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n\n    <!-- CSRF Token -->\n    <meta name=\"csrf-token\" content=\"ic1IcU6OHplmaCAKZa8TvMeXEgBtQMSMwhT11yRy\">\n\n    <title>Laravel</title>\n\n    <!-- Scripts -->\n    <script src=\"http://apinotes.wp-cpm.site/js/app.js\" defer></script>\n\n    <!-- Fonts -->\n    <link rel=\"dns-prefetch\" href=\"//fonts.gstatic.com\">\n    <link href=\"https://fonts.googleapis.com/css?family=Nunito\" rel=\"stylesheet\">\n\n    <!-- Styles -->\n    <link href=\"http://apinotes.wp-cpm.site/css/app.css\" rel=\"stylesheet\">\n</head>\n<body>\n    <div id=\"app\">\n        <nav class=\"navbar navbar-expand-md navbar-light bg-white shadow-sm\">\n            <div class=\"container\">\n                <a class=\"navbar-brand\" href=\"http://apinotes.wp-cpm.site\">\n                    Laravel\n                </a>\n                <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n                    <span class=\"navbar-toggler-icon\"></span>\n                </button>\n\n                <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n                    <!-- Left Side Of Navbar -->\n                    <ul class=\"navbar-nav mr-auto\">\n\n                    </ul>\n\n                    <!-- Right Side Of Navbar -->\n                    <ul class=\"navbar-nav ml-auto\">\n                        <!-- Authentication Links -->\n                                                    <li class=\"nav-item\">\n                                <a class=\"nav-link\" href=\"http://apinotes.wp-cpm.site/login\">Login</a>\n                            </li>\n                                                            <li class=\"nav-item\">\n                                    <a class=\"nav-link\" href=\"http://apinotes.wp-cpm.site/register\">Register</a>\n                                </li>\n                                                                        </ul>\n                </div>\n            </div>\n        </nav>\n\n        <main class=\"py-4\">\n            <div class=\"container\">\n    <div class=\"row justify-content-center\">\n        <div class=\"col-md-8\">\n            <div class=\"card\">\n                <div class=\"card-header\">Reset Password</div>\n\n                <div class=\"card-body\">\n                    <form method=\"POST\" action=\"http://apinotes.wp-cpm.site/password/reset\">\n                        <input type=\"hidden\" name=\"_token\" value=\"ic1IcU6OHplmaCAKZa8TvMeXEgBtQMSMwhT11yRy\">\n                        <input type=\"hidden\" name=\"token\" value=\"omnis\">\n\n                        <div class=\"form-group row\">\n                            <label for=\"email\" class=\"col-md-4 col-form-label text-md-right\">E-Mail Address</label>\n\n                            <div class=\"col-md-6\">\n                                <input id=\"email\" type=\"email\" class=\"form-control \" name=\"email\" value=\"\" required autocomplete=\"email\" autofocus>\n\n                                                            </div>\n                        </div>\n\n                        <div class=\"form-group row\">\n                            <label for=\"password\" class=\"col-md-4 col-form-label text-md-right\">Password</label>\n\n                            <div class=\"col-md-6\">\n                                <input id=\"password\" type=\"password\" class=\"form-control \" name=\"password\" required autocomplete=\"new-password\">\n\n                                                            </div>\n                        </div>\n\n                        <div class=\"form-group row\">\n                            <label for=\"password-confirm\" class=\"col-md-4 col-form-label text-md-right\">Confirm Password</label>\n\n                            <div class=\"col-md-6\">\n                                <input id=\"password-confirm\" type=\"password\" class=\"form-control\" name=\"password_confirmation\" required autocomplete=\"new-password\">\n                            </div>\n                        </div>\n\n                        <div class=\"form-group row mb-0\">\n                            <div class=\"col-md-6 offset-md-4\">\n                                <button type=\"submit\" class=\"btn btn-primary\">\n                                    Reset Password\n                                </button>\n                            </div>\n                        </div>\n                    </form>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n        </main>\n    </div>\n</body>\n</html>\n"
+            tags:
+                - Endpoints
+            security: []
+        parameters:
+            -
+                in: path
+                name: token
+                description: ''
+                example: omnis
+                required: true
+                schema:
+                    type: string
+    /password/confirm:
+        get:
+            summary: 'Display the password confirmation view.'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses:
+                401:
+                    description: ''
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    message: Unauthenticated.
+                                properties:
+                                    message: { type: string, example: Unauthenticated. }
+            tags:
+                - Endpoints
+            security: []
+        post:
+            summary: 'Confirm the given user''s password.'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses: {  }
+            tags:
+                - Endpoints
+            security: []
+    /home:
+        get:
+            summary: 'Show the application dashboard.'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses:
+                401:
+                    description: ''
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    message: Unauthenticated.
+                                properties:
+                                    message: { type: string, example: Unauthenticated. }
+            tags:
+                - Endpoints
+            security: []
+components:
+    securitySchemes:
+        default:
+            type: http
+            scheme: bearer
+            description: ''
+security:
+    -
+        default: []
